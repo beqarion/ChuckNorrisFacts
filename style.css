@@ -103,7 +103,6 @@ button {
   font-size: 1.124rem;
   padding: 0.5rem 0;
 }
-button:hover,
 button:active {
   color: #4086bf;
   background-color: #ff6e3d;
