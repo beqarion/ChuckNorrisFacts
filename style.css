@@ -1,13 +1,14 @@
 @font-face {
   font-family: "RobotoMono";
-  src: url("fonts/RobotoMono-Medium.ttf") format("truetype");
-  font-weight: medium;
-}
-@font-face {
-  font-family: "RobotoMono";
   src: url("fonts/RobotoMono-Bold.ttf") format("truetype");
   font-weight: bold;
 }
+@font-face {
+  font-family: "RobotoMono";
+  src: url("fonts/RobotoMono-Medium.ttf") format("truetype");
+  font-weight: medium;
+}
+
 @font-face {
   font-family: "RobotoMono";
   src: url("fonts/RobotoMono-Regular.ttf") format("truetype");
@@ -56,6 +57,7 @@ header {
   background-repeat: no-repeat;
   background-size: cover;
   grid-area: main;
+  position: relative;
 }
 
 .form {
@@ -72,12 +74,13 @@ header {
 }
 .grid-container {
   width: 80%;
+  max-width: 20rem;
   display: grid;
   gap: 0.5rem;
+  grid-template-columns: 6rem 8rem 4rem;
   grid-template-areas:
-    "random random"
-    "category category-button"
-    "keyword keyword-button";
+    "random category category-button"
+    "random keyword keyword-button";
 }
 .random {
   grid-area: random;
@@ -91,9 +94,22 @@ footer {
     rgba(59, 61, 68, 1) 68%
   );
   grid-area: footer;
+  display: flex;
+  align-items: center;
 }
 
-button {
+footer > div {
+  width: 80%;
+  max-width: 20rem;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+footer > div img {
+  width: 30px;
+}
+
+.btn {
   border: none;
   border-radius: 0.3rem;
   background-color: #4086bf;
@@ -103,6 +119,23 @@ button {
   font-size: 1.124rem;
   padding: 0.5rem 0;
 }
+input.btn {
+  text-align: center;
+  outline: none;
+}
+
+select.btn option,
+input.btn,
+select.btn {
+  text-align: center;
+  outline: none;
+}
+
+input.btn::placeholder {
+  color: #ff6e3d;
+  font-style: italic;
+}
+
 button:active {
   color: #4086bf;
   background-color: #ff6e3d;
