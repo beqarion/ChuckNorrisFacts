@@ -35,3 +35,5 @@ categoryButton.addEventListener("click", (e) => {
       factParagraph.innerText = data.value
     })
 })
+
+function smallTextAndBg() {}

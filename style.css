@@ -79,6 +79,7 @@ header {
 }
 
 .fact {
+  display: none;
   font-family: OpenSans;
   font-weight: 600;
   color: white;
