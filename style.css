@@ -13,6 +13,11 @@
   font-family: "RobotoMono";
   src: url("fonts/RobotoMono-Regular.ttf") format("truetype");
 }
+@font-face {
+  font-family: "OpenSans";
+  src: url("fonts/OpenSans-SemiBold.ttf") format("truetype");
+  font-weight: semibold;
+}
 *,
 *:before,
 *:after {
@@ -53,11 +58,45 @@ header {
   max-width: 75rem;
   background: rgb(2, 3, 6);
   background-image: url("images/heroImg.jpg");
+  /* background-position: 50% 60%;
+  background-size: 220%; */
   background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
+  background-repeat: no-repeat;
   grid-area: main;
   position: relative;
+}
+
+.backdrop {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.fact {
+  font-family: OpenSans;
+  font-weight: 600;
+  color: white;
+  padding: 0.5rem;
+  background: gray;
+  text-align: center;
+  position: absolute;
+  transform: translateY(-50%);
+  max-height: 90%;
+  overflow: auto;
+  /* left: 5%;
+  right: 5%; */
+  left: 25%;
+  right: 25%;
+  top: 50%;
+  border: 10px ridge rgba(49, 109, 164, 0.76);
+  border-radius: 0.3rem;
+  z-index: 10;
 }
 
 .form {
@@ -139,4 +178,9 @@ input.btn::placeholder {
 button:active {
   color: #4086bf;
   background-color: #ff6e3d;
+}
+
+.open {
+  display: block !important;
+  opacity: 1 !important;
 }
