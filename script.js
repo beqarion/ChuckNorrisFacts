@@ -19,3 +19,19 @@ fetch("https://api.chucknorris.io/jokes/categories")
       category.appendChild(option)
     })
   })
+
+categoryButton.addEventListener("click", (e) => {
+  e.preventDefault()
+  console.log(category.value)
+  if (category.value === "none") {
+    category.style.border = "3px solid red"
+    return
+  }
+  category.style.border = "none"
+  fetch(`https://api.chucknorris.io/jokes/random?category=${category.value}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data)
+      factParagraph.innerText = data.value
+    })
+})
