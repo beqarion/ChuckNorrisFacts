@@ -94,7 +94,6 @@ keywordButton.addEventListener("click", (e) => {
         return
       }
       data.result.forEach((el, i, arr) => {
-        e.preventDefault()
         const factParagraph = document.createElement("p")
         factParagraph.innerText = el.value
         fact.appendChild(factParagraph)
