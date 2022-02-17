@@ -45,9 +45,9 @@ backdrop.addEventListener("click", () => {
 })
 
 random.addEventListener("click", (e) => {
+  e.preventDefault()
   resetElem(category)
   resetElem(keyword)
-  e.preventDefault()
   fetch("https://api.chucknorris.io/jokes/random")
     .then((res) => res.json())
     .then((data) => {
