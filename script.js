@@ -20,7 +20,10 @@ fetch("https://api.chucknorris.io/jokes/categories")
       category.appendChild(option)
     })
   })
-
+img.addEventListener("click", () => {
+  resetElem(category)
+  resetElem(keyword)
+})
 categoryButton.addEventListener("click", (e) => {
   e.preventDefault()
   console.log(category.value)
