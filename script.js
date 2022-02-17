@@ -107,12 +107,6 @@ keywordButton.addEventListener("click", (e) => {
     })
 })
 
-document.addEventListener("click", (e) => {
-  if (keyword.contains(e.target)) {
-    keyword.blur()
-  }
-})
-
 function openThem() {
   fact.classList.add("open")
   backdrop.classList.add("open")
