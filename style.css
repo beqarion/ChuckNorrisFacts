@@ -86,7 +86,11 @@ header {
 .fact {
   display: none;
   font-family: OpenSans;
-  font-weight: 600;
+  font-size: 1.2rem;
+  /* line-height: 1.6; */
+  letter-spacing: 0.05rem;
+  word-spacing: 0.05rem;
+  font-weight: 400;
   color: white;
   padding: 0.5rem;
   background: gray;
@@ -114,8 +118,9 @@ header {
   hyphens: auto;
 }
 .fact p::first-letter {
+  font-family: BungeeInline;
   color: #ff4000;
-  font-size: 3rem;
+  font-size: 2.4rem;
   vertical-align: bottom;
   line-height: 0.9em;
 }
