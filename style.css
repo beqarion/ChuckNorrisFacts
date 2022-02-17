@@ -55,16 +55,21 @@ header {
 }
 
 .img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   max-width: 75rem;
   background: rgb(2, 3, 6);
   background-image: url("images/heroImg.jpg");
   /* background-position: 50% 60%;
   background-size: 220%; */
   background-position: center;
-  background-size: cover;
+  /* background-size: cover; */
+  background-size: auto 100%;
   background-repeat: no-repeat;
   grid-area: main;
   position: relative;
+  transition: background 0.5s ease;
 }
 
 .backdrop {
@@ -85,19 +90,34 @@ header {
   color: white;
   padding: 0.5rem;
   background: gray;
-  text-align: center;
-  position: absolute;
-  transform: translateY(-50%);
-  max-height: 90%;
+  /* text-align: center; */
   overflow: auto;
-  /* left: 5%;
-  right: 5%; */
+  width: 50%;
+  max-height: 90%;
+  /* position: absolute;
+  max-height: 90%;
+  transform: translateY(-50%);
+  left: 5%;
+  right: 5%;
   left: 25%;
   right: 25%;
-  top: 50%;
+  top: 50%; */
   border: 10px ridge rgba(49, 109, 164, 0.76);
   border-radius: 0.3rem;
   z-index: 10;
+  transition: width 0.5s ease, height 0.5s ease;
+}
+.fact p {
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+.fact p::first-letter {
+  color: #ff4000;
+  font-size: 3rem;
+  vertical-align: bottom;
+  line-height: 0.9em;
 }
 
 .form {
