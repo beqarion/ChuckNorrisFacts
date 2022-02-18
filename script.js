@@ -122,8 +122,15 @@ function closeThem() {
   fact.classList.remove("open")
   backdrop.classList.remove("open")
 
-  img.style.backgroundPosition = "center"
-  img.style.backgroundSize = "auto 100%"
+  if (window.matchMedia("(orientation: portrait)").matches) {
+    img.style.backgroundPosition = "center"
+    img.style.backgroundSize = "auto 100%"
+  }
+
+  if (window.matchMedia("(orientation: landscape)").matches) {
+    img.style.backgroundPosition = "50% 25%"
+    img.style.backgroundSize = "100% auto"
+  }
 }
 
 function resetElem(elem) {

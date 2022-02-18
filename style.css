@@ -39,6 +39,17 @@ body {
 
   height: 100%;
 }
+@media only screen and (min-device-width: 320px) and (orientation: landscape) {
+  body {
+    display: grid;
+    grid-template-rows: 4rem auto 3rem;
+    grid-template-columns: 4fr 1fr;
+    grid-template-areas:
+      "header header"
+      "main form"
+      "footer footer";
+  }
+}
 
 header {
   background: rgb(25, 26, 29);
@@ -52,6 +63,7 @@ header {
   font-size: 1.25rem;
   color: #ff4000;
   text-align: center;
+  grid-area: header;
 }
 
 .img {
@@ -87,25 +99,15 @@ header {
   display: none;
   font-family: OpenSans;
   font-size: 1.2rem;
-  /* line-height: 1.6; */
   letter-spacing: 0.05rem;
   word-spacing: 0.05rem;
   font-weight: 400;
   color: white;
   padding: 0.5rem;
   background: gray;
-  /* text-align: center; */
   overflow: auto;
   width: 50%;
   max-height: 90%;
-  /* position: absolute;
-  max-height: 90%;
-  transform: translateY(-50%);
-  left: 5%;
-  right: 5%;
-  left: 25%;
-  right: 25%;
-  top: 50%; */
   border: 10px ridge rgba(49, 109, 164, 0.76);
   border-radius: 0.3rem;
   z-index: 10;
@@ -149,6 +151,18 @@ header {
 }
 .random {
   grid-area: random;
+}
+.category {
+  grid-area: category;
+}
+.category-button {
+  grid-area: category-button;
+}
+.keyword {
+  grid-area: keyword;
+}
+.keyword-button {
+  grid-area: keyword-button;
 }
 
 footer {
@@ -209,4 +223,31 @@ button:active {
 .open {
   display: block !important;
   opacity: 1 !important;
+}
+
+@media only screen and (min-device-width: 320px) and (orientation: landscape) {
+  body {
+    display: grid;
+    grid-template-rows: 4rem auto 3rem;
+    grid-template-columns: 3fr minmax(12rem, 1fr);
+    grid-template-areas:
+      "header header"
+      "main form"
+      "footer footer";
+  }
+  .img {
+    background-position: 50% 25%;
+    background-size: 100%;
+  }
+  .grid-container {
+    max-width: 20rem;
+    display: grid;
+    gap: 0.5rem;
+    /* grid-template-columns: 6rem 8rem 4rem; */
+    grid-template-columns: minmax(5rem, 8rem) minmax(2rem, 3rem);
+    grid-template-areas:
+      "random random"
+      "category category-button"
+      "keyword keyword-button";
+  }
 }
