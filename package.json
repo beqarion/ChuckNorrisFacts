@@ -4,6 +4,7 @@
   "description": "https://beqarion.github.io/ChuckNorrisFacts/",
   "main": "index.js",
   "scripts": {
+    "deploy":"git add . && git commit -m 'asdf' && git push origin main",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
