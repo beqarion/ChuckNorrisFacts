@@ -29,6 +29,8 @@ html {
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
+
   display: grid;
   grid-template-rows: 4rem calc(100vh - 11.5rem) 8.5rem 3rem;
   grid-template-areas:
@@ -36,22 +38,9 @@ body {
     "main"
     "form"
     "footer";
-
-  height: 100%;
-}
-@media only screen and (min-device-width: 320px) and (orientation: landscape) {
-  body {
-    display: grid;
-    grid-template-rows: 4rem auto 3rem;
-    grid-template-columns: 4fr 1fr;
-    grid-template-areas:
-      "header header"
-      "main form"
-      "footer footer";
-  }
 }
 
-header {
+.header {
   background: rgb(25, 26, 29);
   background: linear-gradient(
     160deg,
@@ -66,21 +55,18 @@ header {
   grid-area: header;
 }
 
-.img {
+.content {
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: 75rem;
+  position: relative;
   background: rgb(2, 3, 6);
   background-image: url("images/heroImg.jpg");
-  /* background-position: 50% 60%;
-  background-size: 220%; */
   background-position: center;
-  /* background-size: cover; */
   background-size: auto 100%;
   background-repeat: no-repeat;
   grid-area: main;
-  position: relative;
   transition: background 0.5s ease;
 }
 
@@ -95,7 +81,7 @@ header {
   background: rgba(0, 0, 0, 0.5);
 }
 
-.fact {
+.facts {
   display: none;
   font-family: OpenSans;
   font-size: 1.2rem;
@@ -113,13 +99,13 @@ header {
   z-index: 10;
   transition: width 0.5s ease, height 0.5s ease;
 }
-.fact p {
+.facts p {
   word-break: break-all;
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
 }
-.fact p::first-letter {
+.facts p::first-letter {
   font-family: BungeeInline;
   color: #ff4000;
   font-size: 2.4rem;
@@ -139,7 +125,7 @@ header {
     rgba(25, 26, 29, 1) 87%
   );
 }
-.grid-container {
+.button-container {
   width: 80%;
   max-width: 20rem;
   display: grid;
@@ -165,7 +151,7 @@ header {
   grid-area: keyword-button;
 }
 
-footer {
+.footer {
   background: rgb(25, 38, 77);
   background: linear-gradient(
     330deg,

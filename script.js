@@ -4,25 +4,16 @@ const categoryButton = document.querySelector(".category-button")
 const keyword = document.querySelector(".keyword")
 const keywordButton = document.querySelector(".keyword-button")
 
-const img = document.querySelector(".img")
+const content = document.querySelector(".content")
 const backdrop = document.querySelector(".backdrop")
-const fact = document.querySelector(".fact")
+const facts = document.querySelector(".facts")
 
-let url
+populateCategory(category)
 
-fetch("https://api.chucknorris.io/jokes/categories")
-  .then((res) => res.json())
-  .then((data) => {
-    data.forEach((el) => {
-      const option = document.createElement("option")
-      option.innerText = el.charAt(0).toUpperCase() + el.slice(1)
-      option.setAttribute("value", el)
-      category.appendChild(option)
-    })
-  })
-img.addEventListener("click", () => {
+content.addEventListener("click", () => {
   resetElem(category)
   resetElem(keyword)
+  resetElem(facts)
 })
 categoryButton.addEventListener("click", (e) => {
   e.preventDefault()
@@ -32,16 +23,10 @@ categoryButton.addEventListener("click", (e) => {
     return
   }
   category.style.border = "none"
-  fetch(`https://api.chucknorris.io/jokes/random?category=${category.value}`)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data)
-      fact.innerHTML = ""
-      const factParagraph = document.createElement("p")
-      fact.appendChild(factParagraph)
-      factParagraph.innerText = data.value
-      openThem()
-    })
+  populateWithFacts(
+    facts,
+    `https://api.chucknorris.io/jokes/random?category=${category.value}`
+  )
 })
 backdrop.addEventListener("click", () => {
   closeThem()
@@ -51,16 +36,8 @@ random.addEventListener("click", (e) => {
   e.preventDefault()
   resetElem(category)
   resetElem(keyword)
-  fetch("https://api.chucknorris.io/jokes/random")
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data)
-      fact.innerHTML = ""
-      const factParagraph = document.createElement("p")
-      fact.appendChild(factParagraph)
-      factParagraph.innerText = data.value
-      openThem()
-    })
+  populateWithFacts(facts, "https://api.chucknorris.io/jokes/random")
+  openThem()
 })
 
 keywordButton.addEventListener("click", (e) => {
@@ -72,64 +49,34 @@ keywordButton.addEventListener("click", (e) => {
     return
   }
   keyword.style.border = "none"
-  fetch(`https://api.chucknorris.io/jokes/search?query=${keyword.value}`)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data)
-      fact.innerHTML = ""
-
-      if (data.error) {
-        const factParagraph = document.createElement("p")
-        factParagraph.innerText = data.violations["search.query"]
-        factParagraph.style.color = "orange"
-        fact.appendChild(factParagraph)
-        openThem()
-        return
-      }
-      if (data.total === 0) {
-        const factParagraph = document.createElement("p")
-        factParagraph.innerText = "Try anything else"
-        fact.appendChild(factParagraph)
-        openThem()
-        return
-      }
-      data.result.forEach((el, i, arr) => {
-        const factParagraph = document.createElement("p")
-        factParagraph.innerText = el.value
-        fact.appendChild(factParagraph)
-        if (i !== arr.length - 1) {
-          const hr = document.createElement("HR")
-          fact.appendChild(hr)
-        }
-      })
-
-      openThem()
-    })
+  populateWithFacts(
+    facts,
+    `https://api.chucknorris.io/jokes/search?query=${keyword.value}`
+  )
 })
-
 function openThem() {
-  fact.classList.add("open")
+  facts.classList.add("open")
   backdrop.classList.add("open")
 
-  img.style.backgroundPosition = "50% 60%"
-  img.style.backgroundSize = "auto 220%"
+  content.style.backgroundPosition = "50% 60%"
+  content.style.backgroundSize = "auto 220%"
 
   setTimeout(() => {
-    fact.style.width = "90%"
+    facts.style.width = "90%"
   }, 1)
 }
 function closeThem() {
-  fact.classList.remove("open")
+  facts.classList.remove("open")
   backdrop.classList.remove("open")
 
   if (window.matchMedia("(orientation: portrait)").matches) {
-    img.style.backgroundPosition = "center"
-    img.style.backgroundSize = "auto 100%"
+    content.style.backgroundPosition = "center"
+    content.style.backgroundSize = "auto 100%"
   }
 
   if (window.matchMedia("(orientation: landscape)").matches) {
-    img.style.backgroundPosition = "50% 25%"
-    img.style.backgroundSize = "100% auto"
+    content.style.backgroundPosition = "50% 25%"
+    content.style.backgroundSize = "100% auto"
   }
 }
 
@@ -139,5 +86,58 @@ function resetElem(elem) {
     elem.value = ""
   } else if (elem.nodeName === "SELECT") {
     elem.selectedIndex = 0
+  } else if (elem.nodeName === "P") {
+    elem.style.width = "50%"
+    elem.style.maxHeight = "90%"
   }
+}
+
+async function populateCategory(selectElement) {
+  const res = await fetch("https://api.chucknorris.io/jokes/categories")
+  const data = await res.json()
+  data.forEach((el) => {
+    const option = document.createElement("option")
+    option.innerText = el.charAt(0).toUpperCase() + el.slice(1)
+    option.setAttribute("value", el)
+    selectElement.appendChild(option)
+  })
+}
+
+async function populateWithFacts(parent, url) {
+  const res = await fetch(url)
+  const data = await res.json()
+
+  if (data.error) {
+    const factParagraph = document.createElement("p")
+    factParagraph.innerText = data.violations["search.query"]
+    factParagraph.style.color = "orange"
+    facts.appendChild(factParagraph)
+    openThem()
+    return
+  }
+  if (data.total === 0) {
+    const factParagraph = document.createElement("p")
+    factParagraph.innerText = "Try anything else"
+    facts.appendChild(factParagraph)
+    openThem()
+    return
+  }
+  if (Array.isArray(data.result)) {
+    data.result.forEach((el, i, arr) => {
+      const factParagraph = document.createElement("p")
+      factParagraph.innerText = el.value
+      parent.appendChild(factParagraph)
+      if (i !== arr.length - 1) {
+        const hr = document.createElement("HR")
+        parent.appendChild(hr)
+      }
+    })
+  } else {
+    console.log(data)
+    parent.innerHTML = ""
+    const factParagraph = document.createElement("p")
+    parent.appendChild(factParagraph)
+    factParagraph.innerText = data.value
+  }
+  openThem()
 }
