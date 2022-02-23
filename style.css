@@ -59,7 +59,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 75rem;
+  /* max-width: 75rem; */
   position: relative;
   background: rgb(2, 3, 6);
   background-image: url("images/heroImg.jpg");
@@ -97,7 +97,7 @@ body {
   border: 10px ridge rgba(49, 109, 164, 0.76);
   border-radius: 0.3rem;
   z-index: 10;
-  transition: width 0.5s ease, height 0.5s ease;
+  transition: width 0.5s ease;
 }
 .facts p {
   word-break: break-all;
@@ -126,7 +126,7 @@ body {
   );
 }
 .button-container {
-  width: 80%;
+  /* width: 80%; */
   max-width: 20rem;
   display: grid;
   gap: 0.5rem;
@@ -214,8 +214,8 @@ button:active {
 @media only screen and (min-device-width: 320px) and (orientation: landscape) {
   body {
     display: grid;
-    grid-template-rows: 4rem auto 3rem;
-    grid-template-columns: 3fr minmax(12rem, 1fr);
+    grid-template-rows: 4rem calc(100% - 7rem) 3rem;
+    grid-template-columns: 10fr 3fr;
     grid-template-areas:
       "header header"
       "main form"
@@ -223,17 +223,44 @@ button:active {
   }
   .img {
     background-position: 50% 25%;
-    background-size: 100%;
+    background-size: 200%;
   }
-  .grid-container {
-    max-width: 20rem;
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* max-width: 75rem; */
+    position: relative;
+    background: rgb(2, 3, 6);
+    background-image: url("images/heroImg.jpg");
+    /* background-position: center;
+    background-size: auto 100%; */
+    background-position: 50% 25%;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    grid-area: main;
+    transition: background 0.5s ease;
+  }
+
+  .button-container {
+    width: 3rem;
     display: grid;
     gap: 0.5rem;
-    /* grid-template-columns: 6rem 8rem 4rem; */
-    grid-template-columns: minmax(5rem, 8rem) minmax(2rem, 3rem);
+    width: 80%;
+    grid-template-columns: 70% calc(30% - 0.5rem);
     grid-template-areas:
       "random random"
       "category category-button"
       "keyword keyword-button";
+  }
+
+  .btn {
+    border: none;
+    border-radius: 0.3rem;
+    background-color: #4086bf;
+    color: #ff6e3d;
+    font-family: RobotoMono;
+    font-size: 1.124rem;
+    padding: 0.5rem 0;
   }
 }

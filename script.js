@@ -4,6 +4,7 @@ const categoryButton = document.querySelector(".category-button")
 const keyword = document.querySelector(".keyword")
 const keywordButton = document.querySelector(".keyword-button")
 
+const form = document.querySelector(".form")
 const content = document.querySelector(".content")
 const backdrop = document.querySelector(".backdrop")
 const facts = document.querySelector(".facts")
@@ -15,6 +16,7 @@ content.addEventListener("click", () => {
   resetElem(keyword)
   resetElem(facts)
 })
+
 categoryButton.addEventListener("click", (e) => {
   e.preventDefault()
   console.log(category.value)
@@ -58,12 +60,23 @@ function openThem() {
   facts.classList.add("open")
   backdrop.classList.add("open")
 
-  content.style.backgroundPosition = "50% 60%"
-  content.style.backgroundSize = "auto 220%"
+  if (window.matchMedia("(orientation: portrait)").matches) {
+    content.style.backgroundPosition = "50% 60%"
+    content.style.backgroundSize = "auto 220%"
 
-  setTimeout(() => {
-    facts.style.width = "90%"
-  }, 1)
+    setTimeout(() => {
+      facts.style.width = "90%"
+    }, 1)
+  }
+
+  if (window.matchMedia("(orientation: landscape)").matches) {
+    content.style.backgroundPosition = "50% 60%"
+    content.style.backgroundSize = "220% auto"
+
+    setTimeout(() => {
+      facts.style.width = "90%"
+    }, 1)
+  }
 }
 function closeThem() {
   facts.classList.remove("open")
@@ -72,23 +85,33 @@ function closeThem() {
   if (window.matchMedia("(orientation: portrait)").matches) {
     content.style.backgroundPosition = "center"
     content.style.backgroundSize = "auto 100%"
+
+    setTimeout(() => {
+      facts.style.width = "50%"
+    }, 1)
   }
 
   if (window.matchMedia("(orientation: landscape)").matches) {
     content.style.backgroundPosition = "50% 25%"
     content.style.backgroundSize = "100% auto"
+
+    setTimeout(() => {
+      facts.style.width = "50%"
+    }, 1)
   }
 }
 
 function resetElem(elem) {
-  elem.style.border = "none"
   if (elem.nodeName === "INPUT") {
     elem.value = ""
+    elem.style.border = "none"
   } else if (elem.nodeName === "SELECT") {
     elem.selectedIndex = 0
+    elem.style.border = "none"
   } else if (elem.nodeName === "P") {
     elem.style.width = "50%"
     elem.style.maxHeight = "90%"
+    elem.value = ""
   }
 }
 
@@ -123,6 +146,7 @@ async function populateWithFacts(parent, url) {
     return
   }
   if (Array.isArray(data.result)) {
+    resetElem(keyword)
     data.result.forEach((el, i, arr) => {
       const factParagraph = document.createElement("p")
       factParagraph.innerText = el.value
@@ -134,6 +158,7 @@ async function populateWithFacts(parent, url) {
     })
   } else {
     console.log(data)
+    resetElem(keyword)
     parent.innerHTML = ""
     const factParagraph = document.createElement("p")
     parent.appendChild(factParagraph)
