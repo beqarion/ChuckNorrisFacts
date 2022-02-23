@@ -18,7 +18,6 @@ content.addEventListener("click", () => {
 })
 
 categoryButton.addEventListener("click", (e) => {
-  e.preventDefault()
   console.log(category.value)
   if (category.value === "none") {
     category.style.border = "3px solid red"
@@ -35,7 +34,6 @@ backdrop.addEventListener("click", () => {
 })
 
 random.addEventListener("click", (e) => {
-  e.preventDefault()
   resetElem(category)
   resetElem(keyword)
   populateWithFacts(facts, "https://api.chucknorris.io/jokes/random")
@@ -43,7 +41,6 @@ random.addEventListener("click", (e) => {
 })
 
 keywordButton.addEventListener("click", (e) => {
-  e.preventDefault()
   console.log(keyword.value)
   if (keyword.value.trim() === "") {
     keyword.style.border = "3px solid red"
