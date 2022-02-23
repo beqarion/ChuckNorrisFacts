@@ -214,7 +214,7 @@ button:active {
 @media only screen and (min-device-width: 320px) and (orientation: landscape) {
   body {
     display: grid;
-    grid-template-rows: 4rem calc(100% - 7rem) 3rem;
+    grid-template-rows: 4rem calc(100% - 3rem) 3rem;
     grid-template-columns: 10fr 3fr;
     grid-template-areas:
       "header header"
